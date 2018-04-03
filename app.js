@@ -83,12 +83,42 @@ router.route('/story')
 
     // mendapatkan semua person (akses GET ke http://localhost:3000/api/person)
     .get((req, res) => {
-        Story.find((err, data) => {
+        // find story using populate => note the difference in results
+        Story.find()
+            .populate('author')
+            .exec((err, data) => {
+                if (err) res.send(err);
+
+                res.json(data);
+            });
+    });
+
+// mendapatkan story dengan id tertentu (akses GET ke http://localhost:3000/api/story/:story_id)
+router.get('/story/:story_id', (req, res) => {
+    Story.findById(req.params.story_id)
+        .populate('author', 'name') // field selection => just show name field in populated document
+        .exec((err, data) => {
             if (err) res.send(err);
 
             res.json(data);
         });
-    });
+});
+
+// mendapatkan data author melalui story dengan id tertentu (akses GET ke http://localhost:3000/get_author/:story_id)
+router.get('/get_author/:story_id', (req, res) => {
+    Story.findById(req.params.story_id)
+        .populate('author')
+        .exec((err, data) => {
+            if (err) res.send(err);
+
+            author_data = {
+                name: data.author.name,         // access author(person) name
+                address: data.author.address    // access author(person) address
+            };
+            res.json(author_data);
+        });
+})
+
 
 // register routes
 // semua route (url) akan diawali dengan /api
