@@ -1,0 +1,22 @@
+{
+  "name": "learn-mongoose-populate",
+  "version": "1.0.0",
+  "description": "Learn about mongoose population",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mongoose",
+    "populate",
+    "mongodb",
+    "indraarianggi"
+  ],
+  "author": "Indra Arianggi",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.12"
+  }
+}
